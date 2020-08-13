@@ -7,8 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.bluetasks.bluetasksbackend.domain.user.AppUser;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Task {
@@ -17,15 +22,19 @@ public class Task {
     @GeneratedValue
     private Integer id;
     
-    
+    @NotEmpty(message = "Descrição obrigatória")
+    @Length(min = 3, max = 40, message = "Tamanho Inválido")
     private String description;
 
+    @NotNull(message = "Data Obrigatória")
+    @FutureOrPresent(message = "A data da tarefa não pode estar no passado")
     private LocalDate whenToDo;
 
     private Boolean done = false;
 
     @ManyToOne
     @JoinColumn(name = "appUserId")
+    @NotNull(message = "Usuário é obrigatório")
     private AppUser appUser;
 
     public Task() { }
