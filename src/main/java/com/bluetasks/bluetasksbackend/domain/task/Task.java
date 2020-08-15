@@ -34,7 +34,6 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "appUserId")
-    @NotNull(message = "Usuário é obrigatório")
     private AppUser appUser;
 
     public Task() { }

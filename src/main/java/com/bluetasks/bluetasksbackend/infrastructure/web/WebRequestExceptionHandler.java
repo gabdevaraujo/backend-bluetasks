@@ -1,5 +1,7 @@
 package com.bluetasks.bluetasksbackend.infrastructure.web;
 
+import com.bluetasks.bluetasksbackend.domain.task.DuplicateTaskException;
+
 import org.springframework.data.rest.core.RepositoryConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,4 +17,9 @@ public class WebRequestExceptionHandler {
         return RestResponseError.fromValidationError(e.getErrors());
     }
     
+    @ExceptionHandler
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public RestResponseError handleException(DuplicateTaskException e){
+        return RestResponseError.fromMessage(e.getMessage());
+    }
 }
