@@ -10,6 +10,8 @@ import com.bluetasks.bluetasksbackend.domain.user.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,7 +31,8 @@ public class InsertTestData {
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event){
 
-        AppUser appUser = new AppUser("John", "abc", "John Coder");
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        AppUser appUser = new AppUser("John", encoder.encode("abc"), "John Coder");
         appUserRepository.save(appUser);
 
         LocalDate baseDate = LocalDate.parse("2025-02-01");
