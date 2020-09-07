@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BluetasksBackendApplication<bluetasks-backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "br.com.softblue.bluetasks.BluetasksBackendApplication",
+            "projectName": "bluetasks-backend",
+            "args": ""
+        }
+    ]
+}
